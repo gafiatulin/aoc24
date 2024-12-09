@@ -1,38 +1,25 @@
 use rayon::prelude::*;
 use std::collections::HashSet;
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash, Default)]
 enum Direction {
+    #[default]
     Up,
     Down,
     Left,
     Right,
 }
-#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash, Default)]
 pub struct Position {
     x: i32,
     y: i32,
     direction: Direction,
 }
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct State {
     position: Position,
     obstructions: HashSet<(i32, i32)>,
     dimensions: (i32, i32),
-}
-
-impl Default for State {
-    fn default() -> Self {
-        Self {
-            position: Position {
-                x: 0,
-                y: 0,
-                direction: Direction::Up,
-            },
-            obstructions: HashSet::new(),
-            dimensions: (0, 0),
-        }
-    }
 }
 
 #[aoc_generator(day6)]
