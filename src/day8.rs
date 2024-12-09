@@ -1,25 +1,16 @@
 use itertools::Itertools;
 use std::collections::{HashMap, HashSet};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub struct Point {
     x: i32,
     y: i32,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Default)]
 pub struct Input {
     antenna_groups: HashMap<char, Vec<Point>>,
     dimensions: Point,
-}
-
-impl Default for Input {
-    fn default() -> Self {
-        Self {
-            antenna_groups: HashMap::new(),
-            dimensions: Point { x: 0, y: 0 },
-        }
-    }
 }
 
 #[aoc_generator(day8)]
