@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 pub struct Input {
     aas: Vec<u64>,
     bbs: Vec<u64>,
@@ -28,13 +30,10 @@ pub fn part1(input: &Input) -> u64 {
 
 #[aoc(day1, part2)]
 pub fn part2(input: &Input) -> u64 {
-    let b_counts = input
-        .bbs
-        .iter()
-        .fold(std::collections::HashMap::new(), |mut acc, b| {
-            *acc.entry(b).or_insert(0) += 1;
-            acc
-        });
+    let b_counts = input.bbs.iter().fold(HashMap::new(), |mut acc, b| {
+        *acc.entry(b).or_insert(0) += 1;
+        acc
+    });
 
     input
         .aas
