@@ -1,13 +1,13 @@
 use itertools::Itertools;
 use std::collections::{HashMap, HashSet};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub struct Point {
     x: i32,
     y: i32,
 }
 
-#[derive(Debug, Default)]
+#[derive(Default)]
 pub struct Input {
     antenna_groups: HashMap<char, Vec<Point>>,
     dimensions: Point,
