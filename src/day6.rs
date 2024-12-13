@@ -1,7 +1,7 @@
 use rayon::prelude::*;
 use std::collections::HashSet;
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash, Default)]
 enum Direction {
     #[default]
     Up,
@@ -9,13 +9,13 @@ enum Direction {
     Left,
     Right,
 }
-#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash, Default)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash, Default)]
 pub struct Position {
     x: i32,
     y: i32,
     direction: Direction,
 }
-#[derive(Debug, Clone, Default)]
+#[derive(Clone, Default)]
 pub struct State {
     position: Position,
     obstructions: HashSet<(i32, i32)>,

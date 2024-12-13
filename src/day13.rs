@@ -1,6 +1,6 @@
 use itertools::Itertools;
 
-#[derive(Debug, Copy, Clone)]
+#[derive(Copy, Clone)]
 pub struct Equation {
     da: u128,
     db: u128,

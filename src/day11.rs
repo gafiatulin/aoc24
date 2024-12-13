@@ -1,22 +1,9 @@
 use std::collections::HashMap;
-use std::fmt::Debug;
 use std::iter::from_fn;
 
 #[derive(Clone, Hash, PartialEq, Eq)]
 pub struct Stone {
     number: Vec<u8>,
-}
-
-impl Debug for Stone {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let number = self
-            .number
-            .iter()
-            .map(|x| x.to_string())
-            .collect::<Vec<String>>()
-            .join("");
-        write!(f, "{}", number)
-    }
 }
 
 impl Stone {
