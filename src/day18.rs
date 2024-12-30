@@ -1,4 +1,4 @@
-use std::collections::VecDeque;
+use crate::util::mk_dist_map;
 
 #[aoc_generator(day18)]
 pub fn input_generator(input: &str) -> Vec<(usize, usize)> {
@@ -15,50 +15,27 @@ pub fn input_generator(input: &str) -> Vec<(usize, usize)> {
 }
 
 #[aoc(day18, part1)]
-pub fn part1(input: &[(usize, usize)]) -> u32 {
+pub fn part1(input: &[(usize, usize)]) -> u64 {
     path_length(input, 1024)
 }
 
 #[aoc(day18, part2)]
 pub fn part2(input: &[(usize, usize)]) -> String {
     let idx = (1024..)
-        .find(|steps| path_length(input, *steps) == u32::MAX)
+        .find(|steps| path_length(input, *steps) == u64::MAX)
         .unwrap();
     let (x, y) = input[idx - 1];
     format!("{},{}", x, y)
 }
 
-fn path_length(input: &[(usize, usize)], steps: usize) -> u32 {
+fn path_length(input: &[(usize, usize)], steps: usize) -> u64 {
     let dim = 71;
     let mut map = vec![vec![true; dim]; dim];
-    let mut dist_map = vec![vec![u32::MAX; dim]; dim];
 
     input.iter().take(steps).for_each(|(x, y)| {
         map[*y][*x] = false;
     });
 
-    let mut queue = VecDeque::new();
-    queue.push_back((0, 0));
-    dist_map[0][0] = 0;
-    while let Some((x, y)) = queue.pop_front() {
-        let dist = dist_map[y][x];
-        if x > 0 && map[y][x - 1] && dist + 1 < dist_map[y][x - 1] {
-            dist_map[y][x - 1] = dist + 1;
-            queue.push_back((x - 1, y));
-        }
-        if x < dim - 1 && map[y][x + 1] && dist + 1 < dist_map[y][x + 1] {
-            dist_map[y][x + 1] = dist + 1;
-            queue.push_back((x + 1, y));
-        }
-        if y > 0 && map[y - 1][x] && dist + 1 < dist_map[y - 1][x] {
-            dist_map[y - 1][x] = dist + 1;
-            queue.push_back((x, y - 1));
-        }
-        if y < dim - 1 && map[y + 1][x] && dist + 1 < dist_map[y + 1][x] {
-            dist_map[y + 1][x] = dist + 1;
-            queue.push_back((x, y + 1));
-        }
-    }
-
+    let dist_map = mk_dist_map(&map, (0, 0), (dim, dim));
     dist_map[dim - 1][dim - 1]
 }
